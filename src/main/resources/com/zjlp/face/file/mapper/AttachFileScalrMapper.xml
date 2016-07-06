@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjlp.face.file.mapper.AttachFileScalrMapper" >
+  <resultMap id="BaseResultMap" type="com.zjlp.face.file.domain.AttachFileScalr" >
+    <id column="FILE_SCALR_NO" property="fileScalrNo" jdbcType="VARCHAR" />
+    <result column="ATTACH_FILE_NO" property="attachFileNo" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="SHOP" property="shop" jdbcType="VARCHAR" />
+    <result column="SCALR_TYPE" property="scalrType" jdbcType="VARCHAR" />
+    <result column="SCALR_SIZE" property="scalrSize" jdbcType="BIGINT" />
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+    <result column="TABLE_ID" property="tableId" jdbcType="VARCHAR" />
+    <result column="SCALR_PATH" property="scalrPath" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="FILE_LABEL" property="fileLabel" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    FILE_SCALR_NO, ATTACH_FILE_NO, USER_ID, SHOP, SCALR_TYPE, SCALR_SIZE, TABLE_NAME, 
+    TABLE_ID, SCALR_PATH, CODE, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from attach_file_scalr
+    where FILE_SCALR_NO = #{fileScalrNo,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByAttachFileNo" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select 
+    <include refid="Base_Column_List" />
+    from attach_file_scalr
+    where ATTACH_FILE_NO = #{attachFileNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from attach_file_scalr
+    where FILE_SCALR_NO = #{fileScalrNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.zjlp.face.file.domain.AttachFileScalr" >
+       <selectKey resultType="java.lang.String" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+	 </selectKey>
+    insert into attach_file_scalr (FILE_SCALR_NO, ATTACH_FILE_NO, USER_ID, 
+      SHOP, SCALR_TYPE, SCALR_SIZE, 
+      TABLE_NAME, TABLE_ID, SCALR_PATH, 
+      CODE, FILE_LABEL, CREATE_TIME, UPDATE_TIME
+      )
+    values (#{fileScalrNo,jdbcType=VARCHAR}, #{attachFileNo,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, 
+      #{shop,jdbcType=VARCHAR}, #{scalrType,jdbcType=VARCHAR}, #{scalrSize,jdbcType=BIGINT}, 
+      #{tableName,jdbcType=VARCHAR}, #{tableId,jdbcType=VARCHAR}, #{scalrPath,jdbcType=VARCHAR}, 
+      #{code,jdbcType=VARCHAR},#{fileLabel,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjlp.face.file.domain.AttachFileScalr" >
+       <selectKey resultType="java.lang.String" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS id
+	 </selectKey>
+    insert into attach_file_scalr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fileScalrNo != null" >
+        FILE_SCALR_NO,
+      </if>
+      <if test="attachFileNo != null" >
+        ATTACH_FILE_NO,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="shop != null" >
+        SHOP,
+      </if>
+      <if test="scalrType != null" >
+        SCALR_TYPE,
+      </if>
+      <if test="scalrSize != null" >
+        SCALR_SIZE,
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME,
+      </if>
+      <if test="tableId != null" >
+        TABLE_ID,
+      </if>
+      <if test="scalrPath != null" >
+        SCALR_PATH,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="fileLabel != null" >
+        FILE_LABEL,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fileScalrNo != null" >
+        #{fileScalrNo,jdbcType=VARCHAR},
+      </if>
+      <if test="attachFileNo != null" >
+        #{attachFileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="shop != null" >
+        #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="scalrType != null" >
+        #{scalrType,jdbcType=VARCHAR},
+      </if>
+      <if test="scalrSize != null" >
+        #{scalrSize,jdbcType=BIGINT},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableId != null" >
+        #{tableId,jdbcType=VARCHAR},
+      </if>
+      <if test="scalrPath != null" >
+        #{scalrPath,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="fileLabel != null" >
+        #{fileLabel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjlp.face.file.domain.AttachFileScalr" >
+    update attach_file_scalr
+    <set >
+      <if test="attachFileNo != null" >
+        ATTACH_FILE_NO = #{attachFileNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="shop != null" >
+        SHOP = #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="scalrType != null" >
+        SCALR_TYPE = #{scalrType,jdbcType=VARCHAR},
+      </if>
+      <if test="scalrSize != null" >
+        SCALR_SIZE = #{scalrSize,jdbcType=BIGINT},
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableId != null" >
+        TABLE_ID = #{tableId,jdbcType=VARCHAR},
+      </if>
+      <if test="scalrPath != null" >
+        SCALR_PATH = #{scalrPath,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="fileLabel != null" >
+        FILE_LABEL = #{fileLabel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where FILE_SCALR_NO = #{fileScalrNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjlp.face.file.domain.AttachFileScalr" >
+    update attach_file_scalr
+    set ATTACH_FILE_NO = #{attachFileNo,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=BIGINT},
+      SHOP = #{shop,jdbcType=VARCHAR},
+      SCALR_TYPE = #{scalrType,jdbcType=VARCHAR},
+      SCALR_SIZE = #{scalrSize,jdbcType=BIGINT},
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      TABLE_ID = #{tableId,jdbcType=VARCHAR},
+      SCALR_PATH = #{scalrPath,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      FILE_LABEL = #{fileLabel,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where FILE_SCALR_NO = #{fileScalrNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd   
+	http://www.springframework.org/schema/context   
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	http://www.springframework.org/schema/task
+	http://www.springframework.org/schema/task/spring-task-3.1.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+<!-- 	<bean id="tfsSession" class="com.taobao.common.tfs.impl.TfsSession" init-method="init"> -->
+<!-- 		<property name="nameServerIp"> -->
+<!-- 			<value>115.29.235.115:8108</value> -->
+<!-- 	    </property> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="tfsManager" class="com.taobao.common.tfs.DefaultTfsManager" > -->
+<!--        <property name="tfsSession" ref="tfsSession"/> -->
+<!--    </bean> -->
+
+	<bean id="tfsManager" class="com.taobao.common.tfs.DefaultTfsManager" >
+<!--        <property name="masterIP"> -->
+<!--        		<value>115.29.235.115:8108</value> -->
+<!--        </property> -->
+ 	  <!-- nameServer ip:port -->
+      <property name="nsip">
+        <value>121.42.9.235:8108</value>
+      </property>
+       <!-- TFS 集群的编号,这个编号只是一种参考,系统初始化的时候会从ns上取,取不到才用本地设置的.!-->
+       <property name="tfsClusterIndex">
+			<value>1</value>
+       </property>
+       <!-- 整个进程中系统最多等待多少个请求,取决于你有多少个线程并发的请求TFS -->
+       <property name="maxWaitThread">
+			<value>100</value>
+      </property>
+      <!-- 单个请求最大的等待时间(ms) 超过这个时间放弃这次请求-->
+       <property name="timeout">
+			<value>2000</value>
+       </property>
+       <!-- TFS在读取文件的时候会缓存block所在的数据服务器ip,这个参数配置了最多缓存的记录个数!-->
+       <property name="maxCacheItemCount">
+        	<value>10000</value>
+       </property>
+        <!-- 上一项缓存最大有效的时间(ms)!-->
+      <property name="maxCacheTime">
+        <value>5000</value>
+      </property>
+      
+        <!-- 不需要排重功能时，下面配置项可以不设置 -->
+       <!-- tair排重数据库的serverlist -->
+<!--       <property name="uniqueServerList"> -->
+<!--       	<list> -->
+<!--       	  <value>127.0.0.1:5198</value> -->
+<!--       	  <value>127.0.0.2:5198</value> -->
+<!--       	</list> -->
+<!--       </property> -->
+<!--        tair排重数据库的groupName -->
+<!--       <property name="groupName"> -->
+<!--       	<value>group_tfsunique</value> -->
+<!--       </property> -->
+<!--        tair排重数据库的namespace -->
+<!--       <property name="namespace"> -->
+<!--       	<value>102</value> -->
+<!--       </property> -->
+
+   </bean>
+</beans> 

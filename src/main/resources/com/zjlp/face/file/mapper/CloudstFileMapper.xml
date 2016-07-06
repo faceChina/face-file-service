@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjlp.face.file.mapper.CloudstFileMapper" >
+  <resultMap id="BaseResultMap" type="com.zjlp.face.file.domain.CloudstFile" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="SHOP" property="shop" jdbcType="VARCHAR" />
+    <result column="FILE_TYPE" property="fileType" jdbcType="VARCHAR" />
+    <result column="FILE_SIZE" property="fileSize" jdbcType="BIGINT" />
+    <result column="TABLE_NAME" property="tableName" jdbcType="VARCHAR" />
+    <result column="TABLE_ID" property="tableId" jdbcType="VARCHAR" />
+    <result column="FILE_PATH" property="filePath" jdbcType="VARCHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="SORT" property="sort" jdbcType="INTEGER" />
+    <result column="FILE_LABEL" property="fileLabel" jdbcType="INTEGER" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, SHOP, FILE_TYPE, FILE_SIZE, TABLE_NAME, TABLE_ID, FILE_PATH, CODE, 
+    SORT, CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from cloudst_file
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByCodeAndTableId" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from cloudst_file
+    where 
+    	TABLE_ID = #{tableId,jdbcType=VARCHAR} 
+    	and TABLE_NAME = #{tableName,jdbcType=VARCHAR} 
+    	and CODE = #{code,jdbcType=VARCHAR}
+    	and FILE_LABEL = #{fileLabel,jdbcType=INTEGER}
+    order by SORT
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from cloudst_file
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjlp.face.file.domain.CloudstFile" >
+    insert into cloudst_file (ID, USER_ID, SHOP, 
+      FILE_TYPE, FILE_SIZE, TABLE_NAME, 
+      TABLE_ID, FILE_PATH, CODE, 
+      SORT, FILE_LABEL, CREATE_TIME, UPDATE_TIME
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{shop,jdbcType=VARCHAR}, 
+      #{fileType,jdbcType=VARCHAR}, #{fileSize,jdbcType=BIGINT}, #{tableName,jdbcType=VARCHAR}, 
+      #{tableId,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER},#{fileLabel,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjlp.face.file.domain.CloudstFile" >
+    insert into cloudst_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="shop != null" >
+        SHOP,
+      </if>
+      <if test="fileType != null" >
+        FILE_TYPE,
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE,
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME,
+      </if>
+      <if test="tableId != null" >
+        TABLE_ID,
+      </if>
+      <if test="filePath != null" >
+        FILE_PATH,
+      </if>
+      <if test="code != null" >
+        CODE,
+      </if>
+      <if test="fileLabel != null" >
+        FILE_LABEL,
+      </if>
+      <if test="sort != null" >
+        SORT,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="shop != null" >
+        #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="tableName != null" >
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableId != null" >
+        #{tableId,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="fileLabel != null" >
+        #{fileLabel,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjlp.face.file.domain.CloudstFile" >
+    update cloudst_file
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="shop != null" >
+        SHOP = #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        FILE_TYPE = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        FILE_SIZE = #{fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="tableName != null" >
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="tableId != null" >
+        TABLE_ID = #{tableId,jdbcType=VARCHAR},
+      </if>
+      <if test="filePath != null" >
+        FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        CODE = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="fileLabel != null" >
+        FILE_LABEL = #{fileLabel,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null" >
+        SORT = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjlp.face.file.domain.CloudstFile" >
+    update cloudst_file
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      SHOP = #{shop,jdbcType=VARCHAR},
+      FILE_TYPE = #{fileType,jdbcType=VARCHAR},
+      FILE_SIZE = #{fileSize,jdbcType=BIGINT},
+      TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      TABLE_ID = #{tableId,jdbcType=VARCHAR},
+      FILE_PATH = #{filePath,jdbcType=VARCHAR},
+      CODE = #{code,jdbcType=VARCHAR},
+      SORT = #{sort,jdbcType=INTEGER},
+      FILE_LABEL = #{fileLabel,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

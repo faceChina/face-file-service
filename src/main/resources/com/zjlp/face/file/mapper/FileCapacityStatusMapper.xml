@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zjlp.face.file.mapper.FileCapacityStatusMapper" >
+  <resultMap id="BaseResultMap" type="com.zjlp.face.file.domain.FileCapacityStatus" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="SHOP" property="shop" jdbcType="VARCHAR" />
+    <result column="TOTAL_CAPACITY" property="totalCapacity" jdbcType="BIGINT" />
+    <result column="CURRENT_CAPACITY" property="currentCapacity" jdbcType="BIGINT" />
+    <result column="WARN_CAPACITY" property="warnCapacity" jdbcType="BIGINT" />
+    <result column="ACTIVE_CAPACITY" property="activeCapacity" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, SHOP, TOTAL_CAPACITY, CURRENT_CAPACITY, WARN_CAPACITY, ACTIVE_CAPACITY, 
+    CREATE_TIME, UPDATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from file_capacity_status
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from file_capacity_status
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zjlp.face.file.domain.FileCapacityStatus" >
+       <selectKey resultType="long" keyProperty="id">  
+	  SELECT LAST_INSERT_ID()  
+	 </selectKey>  
+    insert into file_capacity_status (ID, USER_ID, SHOP, 
+      TOTAL_CAPACITY, CURRENT_CAPACITY, WARN_CAPACITY, 
+      ACTIVE_CAPACITY, CREATE_TIME, UPDATE_TIME
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{shop,jdbcType=VARCHAR}, 
+      #{totalCapacity,jdbcType=BIGINT}, #{currentCapacity,jdbcType=BIGINT}, #{warnCapacity,jdbcType=BIGINT}, 
+      #{activeCapacity,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zjlp.face.file.domain.FileCapacityStatus" >
+       <selectKey resultType="long" keyProperty="id">  
+	  SELECT LAST_INSERT_ID()  
+	 </selectKey>  
+    insert into file_capacity_status
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="shop != null" >
+        SHOP,
+      </if>
+      <if test="totalCapacity != null" >
+        TOTAL_CAPACITY,
+      </if>
+      <if test="currentCapacity != null" >
+        CURRENT_CAPACITY,
+      </if>
+      <if test="warnCapacity != null" >
+        WARN_CAPACITY,
+      </if>
+      <if test="activeCapacity != null" >
+        ACTIVE_CAPACITY,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="shop != null" >
+        #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCapacity != null" >
+        #{totalCapacity,jdbcType=BIGINT},
+      </if>
+      <if test="currentCapacity != null" >
+        #{currentCapacity,jdbcType=BIGINT},
+      </if>
+      <if test="warnCapacity != null" >
+        #{warnCapacity,jdbcType=BIGINT},
+      </if>
+      <if test="activeCapacity != null" >
+        #{activeCapacity,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zjlp.face.file.domain.FileCapacityStatus" >
+    update file_capacity_status
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="shop != null" >
+        SHOP = #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="totalCapacity != null" >
+        TOTAL_CAPACITY = #{totalCapacity,jdbcType=BIGINT},
+      </if>
+      <if test="currentCapacity != null" >
+        CURRENT_CAPACITY = #{currentCapacity,jdbcType=BIGINT},
+      </if>
+      <if test="warnCapacity != null" >
+        WARN_CAPACITY = #{warnCapacity,jdbcType=BIGINT},
+      </if>
+      <if test="activeCapacity != null" >
+        ACTIVE_CAPACITY = #{activeCapacity,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zjlp.face.file.domain.FileCapacityStatus" >
+    update file_capacity_status
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      SHOP = #{shop,jdbcType=VARCHAR},
+      TOTAL_CAPACITY = #{totalCapacity,jdbcType=BIGINT},
+      CURRENT_CAPACITY = #{currentCapacity,jdbcType=BIGINT},
+      WARN_CAPACITY = #{warnCapacity,jdbcType=BIGINT},
+      ACTIVE_CAPACITY = #{activeCapacity,jdbcType=BIGINT},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
